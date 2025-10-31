@@ -431,9 +431,9 @@
     <!-- EmailJS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        // Inicjalizacja EmailJS - PODMIEN user ID
+        // Inicjalizacja EmailJS z poprawnym kluczem
         (function(){
-            emailjs.init({publicKey: 'TWÓJ_PUBLICZNY_KLUCZ_EMAILJS'});
+            emailjs.init('<SECRET_KEY>');
         })();
     </script>
 </body>

@@ -53,52 +53,105 @@ function calculatePrice() {
     resultDiv.classList.add('show');
 }
 
-// Contact Form Handler
+// Contact Form Handler (EmailJS) with extended error logging & fallback
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
-    };
-
     const messageDiv = document.getElementById('formMessage');
-    
+    messageDiv.className = 'form-message';
+    messageDiv.textContent = '';
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    // Walidacja
+    const errors = [];
+    if(!name) errors.push('Imię i nazwisko');
+    if(!email) errors.push('Email');
+    if(!subject) errors.push('Temat');
+    if(!message) errors.push('Wiadomość');
+    if(errors.length) {
+        messageDiv.className = 'form-message error';
+        messageDiv.textContent = 'Uzupełnij: ' + errors.join(', ');
+        return;
+    }
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        messageDiv.className = 'form-message error';
+        messageDiv.textContent = 'Niepoprawny email.';
+        return;
+    }
+
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wysyłanie...';
+
     try {
-        // In production, this would send to a backend API
-        const response = await fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        });
+        const templateParams = {
+            to_email: email,
+            from_name: name,
+            from_email: 'emailsendertosendemails@gmail.com',
+            phone: phone || 'Nie podano',
+            subject: subject,
+            message: message,
+            current_date: new Date().toLocaleString('pl-PL')
+        };
 
-        // Simulate success for demo
-        setTimeout(() => {
+        // Use config for EmailJS
+        let sendSucceeded = false;
+        try {
+                       emailjs.init('<SECRET_KEY>');
+            await emailjs.send('<SERVICE_ID>', '<TEMPLATE_ID>', templateParams);
+            sendSucceeded = true;
+        } catch(errPrimary) {
+            console.error('EmailJS primary send error:', {
+                status: errPrimary?.status,
+                text: errPrimary?.text,
+                raw: errPrimary
+            });
+            // Fallback tylko jeśli błąd klucza lub 400
+            if (errPrimary?.status === 400 || errPrimary?.status === 422) {
+                console.warn('Attempting fallback fetch to EmailJS REST API...');
+                try {
+                    const resp = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            service_id: '<SERVICE_ID>',
+                            template_id: '<TEMPLATE_ID>',
+                            template_params: templateParams
+                        })
+                    });
+                    if (!resp.ok) {
+                        const txt = await resp.text();
+                        throw new Error('Fallback response not ok: ' + txt);
+                    }
+                    sendSucceeded = true;
+                } catch(errFallback) {
+                    console.error('Fallback REST API failed:', errFallback);
+                }
+            }
+        }
+
+        if (sendSucceeded) {
             messageDiv.className = 'form-message success';
-            messageDiv.textContent = 'Dziękujemy! Wiadomość została wysłana. Odpowiemy najszybciej jak to możliwe.';
+            messageDiv.textContent = 'Dziękujemy! Wiadomość została wysłana.';
             this.reset();
-            
-            setTimeout(() => {
-                messageDiv.className = 'form-message';
-                messageDiv.textContent = '';
-            }, 5000);
-        }, 500);
-
-    } catch (error) {
-        // For demo purposes, show success message
-        messageDiv.className = 'form-message success';
-        messageDiv.textContent = 'Dziękujemy! Wiadomość została wysłana. Odpowiemy najszybciej jak to możliwe.';
-        this.reset();
-        
-        setTimeout(() => {
+        } else {
+            throw new Error('Brak powodzenia wysyłki');
+        }
+    } catch(err) {
+        console.error('Final send error:', err);
+        messageDiv.className = 'form-message error';
+        messageDiv.textContent = 'Nie udało się wysłać wiadomości. Sprawdź klucz EmailJS.';
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Wyślij wiadomość';
+        setTimeout(()=>{
             messageDiv.className = 'form-message';
             messageDiv.textContent = '';
-        }, 5000);
+        }, 6000);
     }
 });
 
@@ -255,3 +308,99 @@ function initializeMeowSound() {
         });
     });
 }
+
+// Interactive Gallery Carousel
+let currentSlideIndex = 0;
+
+// Initialize gallery
+function initGallery() {
+    const slides = document.querySelectorAll('.gallery-slide');
+    const totalSlides = slides.length;
+    
+    // Create dots
+    const dotsContainer = document.getElementById('galleryDots');
+    if (dotsContainer) {
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'dot';
+            if (i === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+    }
+    
+    // Update counter
+    updateCounter();
+}
+
+// Change slide
+function changeSlide(direction) {
+    const slides = document.querySelectorAll('.gallery-slide');
+    const totalSlides = slides.length;
+    const dots = document.querySelectorAll('.dot');
+    
+    slides[currentSlideIndex].classList.remove('active');
+    if (dots[currentSlideIndex]) {
+        dots[currentSlideIndex].classList.remove('active');
+    }
+    
+    currentSlideIndex += direction;
+    
+    // Loop around
+    if (currentSlideIndex >= totalSlides) {
+        currentSlideIndex = 0;
+    } else if (currentSlideIndex < 0) {
+        currentSlideIndex = totalSlides - 1;
+    }
+    
+    slides[currentSlideIndex].classList.add('active');
+    if (dots[currentSlideIndex]) {
+        dots[currentSlideIndex].classList.add('active');
+    }
+    updateCounter();
+}
+
+// Go to specific slide
+function goToSlide(index) {
+    const slides = document.querySelectorAll('.gallery-slide');
+    const dots = document.querySelectorAll('.dot');
+    
+    slides[currentSlideIndex].classList.remove('active');
+    if (dots[currentSlideIndex]) {
+        dots[currentSlideIndex].classList.remove('active');
+    }
+    
+    currentSlideIndex = index;
+    
+    slides[currentSlideIndex].classList.add('active');
+    if (dots[currentSlideIndex]) {
+        dots[currentSlideIndex].classList.add('active');
+    }
+    updateCounter();
+}
+
+// Update counter
+function updateCounter() {
+    const slides = document.querySelectorAll('.gallery-slide');
+    const currentSlideEl = document.getElementById('currentSlide');
+    const totalSlidesEl = document.getElementById('totalSlides');
+    
+    if (currentSlideEl && totalSlidesEl) {
+        currentSlideEl.textContent = currentSlideIndex + 1;
+        totalSlidesEl.textContent = slides.length;
+    }
+}
+
+// Keyboard navigation for gallery
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') {
+        changeSlide(-1);
+    } else if (e.key === 'ArrowRight') {
+        changeSlide(1);
+    }
+});
+
+// Initialize gallery on page load
+window.addEventListener('load', function() {
+    initGallery();
+});
