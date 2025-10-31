@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Królewskie Maine Coony - Hodowla Kotów Rasowych</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -87,38 +91,59 @@
             <h2 class="section-title">Galeria Naszych Kotów</h2>
             <div class="gallery-grid" id="galleryGrid">
                 <div class="gallery-item">
-                    <img src="photos/bee-felten-leidel-IpXFpb5eIdI-unsplash.jpg" alt="Wspaniały Maine Coon" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop" alt="Wspaniały Maine Coon" loading="lazy">
                     <div class="gallery-overlay">
                         <h3>Wspaniały Maine Coon</h3>
                         <p>Piękny przedstawiciel rasy o doskonałej budowie</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/david-escobedo-uELVCdRN8wE-unsplash.jpg" alt="Majestatyczny Kot" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&h=600&fit=crop" alt="Majestatyczny Kot" loading="lazy">
                     <div class="gallery-overlay">
                         <h3>Majestatyczny Kot</h3>
                         <p>Imponujący samiec o charakterystycznej grzywie</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/kanashi-zCFkafZ5tCQ-unsplash.jpg" alt="Elegancja Maine Coona" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?w=600&h=600&fit=crop" alt="Elegancja Maine Coona" loading="lazy">
                     <div class="gallery-overlay">
                         <h3>Elegancja Maine Coona</h3>
                         <p>Wspaniałe umaszczenie i wykwintna sylwetka</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/philip-auld-OBza1T--_R4-unsplash.jpg" alt="Piękno Rasy" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=600&h=600&fit=crop" alt="Piękno Rasy" loading="lazy">
                     <div class="gallery-overlay">
                         <h3>Piękno Rasy</h3>
                         <p>Przepiękny okaz z doskonałym rodowodem</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/zoe-gayah-jonker-uhnbTZC7N9k-unsplash.jpg" alt="Królewska Postawa" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=600&fit=crop" alt="Królewska Postawa" loading="lazy">
                     <div class="gallery-overlay">
                         <h3>Królewska Postawa</h3>
                         <p>Urzekający Maine Coon o wspaniałym charakterze</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=600&h=600&fit=crop" alt="Puszysty Miś" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Puszysty Miś</h3>
+                        <p>Niesamowita grzywa i łagodny charakter</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?w=600&h=600&fit=crop" alt="Młody Maine Coon" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Młody Maine Coon</h3>
+                        <p>Przepiękne kocię z doskonałym potencjałem</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?w=600&h=600&fit=crop" alt="Elegancki Senior" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Elegancki Senior</h3>
+                        <p>Dojrzały Maine Coon o wspaniałej posturze</p>
                     </div>
                 </div>
             </div>
@@ -388,5 +413,13 @@
     </footer>
 
     <script src="script.js"></script>
+    <!-- EmailJS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Inicjalizacja EmailJS - PODMIEN user ID
+        (function(){
+            emailjs.init({publicKey: 'TWÓJ_PUBLICZNY_KLUCZ_EMAILJS'});
+        })();
+    </script>
 </body>
 </html>
