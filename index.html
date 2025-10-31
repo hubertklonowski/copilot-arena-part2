@@ -89,63 +89,78 @@
     <section id="gallery" class="gallery">
         <div class="container">
             <h2 class="section-title">Galeria Naszych Kotów</h2>
-            <div class="gallery-grid" id="galleryGrid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop" alt="Wspaniały Maine Coon" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h3>Wspaniały Maine Coon</h3>
-                        <p>Piękny przedstawiciel rasy o doskonałej budowie</p>
+            <div class="gallery-carousel">
+                <button class="gallery-nav prev" onclick="changeSlide(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="gallery-slider">
+                    <div class="gallery-slide active">
+                        <img src="https://images.unsplash.com/photo-1543055484-ac8fe612bf31?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687" alt="Maine Coon">
+                        <div class="slide-info">
+                            <h3>Majestatyczny Maine Coon</h3>
+                            <p>Piękny przedstawiciel rasy o doskonałej budowie</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-slide">
+                        <img src="https://images.unsplash.com/photo-1675450062716-1d9d1bbebafb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=729" alt="Maine Coon">
+                        <div class="slide-info">
+                            <h3>Uroczy Maine Coon</h3>
+                            <p>Łagodny charakter i przyjazne usposobienie</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-slide">
+                        <img src="https://images.unsplash.com/photo-1564605503879-eb94cf4c02e8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" alt="Maine Coon">
+                        <div class="slide-info">
+                            <h3>Elegancki Maine Coon</h3>
+                            <p>Charakterystyczna grzywa i wyrazisty pysk</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-slide">
+                        <img src="https://images.unsplash.com/photo-1550921482-1dfcceed3452?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" alt="Maine Coon">
+                        <div class="slide-info">
+                            <h3>Wspaniały Maine Coon</h3>
+                            <p>Imponująca, gęsta sierść i potężna budowa</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-slide">
+                        <img src="https://images.unsplash.com/photo-1624477737871-2e6583e7deb0?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1974" alt="Maine Coon">
+                        <div class="slide-info">
+                            <h3>Piękny Maine Coon</h3>
+                            <p>Przepiękne umaszczenie i wyraziste oczy</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-slide">
+                        <img src="https://plus.unsplash.com/premium_photo-1661546379151-380b344dc3f1?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687" alt="Maine Coon">
+                        <div class="slide-info">
+                            <h3>Królewska Postawa</h3>
+                            <p>Dumna i majestatyczna sylwetka Maine Coona</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-slide">
+                        <img src="https://images.unsplash.com/photo-1606213651356-0272cc0becd2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687" alt="Maine Coon">
+                        <div class="slide-info">
+                            <h3>Szlachetny Maine Coon</h3>
+                            <p>Rasowy Maine Coon o wspaniałym wyglądzie</p>
+                        </div>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&h=600&fit=crop" alt="Majestatyczny Kot" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h3>Majestatyczny Kot</h3>
-                        <p>Imponujący samiec o charakterystycznej grzywie</p>
-                    </div>
+                
+                <button class="gallery-nav next" onclick="changeSlide(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <div class="gallery-counter">
+                    <span id="currentSlide">1</span> / <span id="totalSlides">7</span>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?w=600&h=600&fit=crop" alt="Elegancja Maine Coona" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h3>Elegancja Maine Coona</h3>
-                        <p>Wspaniałe umaszczenie i wykwintna sylwetka</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=600&h=600&fit=crop" alt="Piękno Rasy" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h3>Piękno Rasy</h3>
-                        <p>Przepiękny okaz z doskonałym rodowodem</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=600&fit=crop" alt="Królewska Postawa" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h3>Królewska Postawa</h3>
-                        <p>Urzekający Maine Coon o wspaniałym charakterze</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=600&h=600&fit=crop" alt="Puszysty Miś" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h3>Puszysty Miś</h3>
-                        <p>Niesamowita grzywa i łagodny charakter</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?w=600&h=600&fit=crop" alt="Młody Maine Coon" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h3>Młody Maine Coon</h3>
-                        <p>Przepiękne kocię z doskonałym potencjałem</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?w=600&h=600&fit=crop" alt="Elegancki Senior" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h3>Elegancki Senior</h3>
-                        <p>Dojrzały Maine Coon o wspaniałej posturze</p>
-                    </div>
-                </div>
+                
+                <div class="gallery-dots" id="galleryDots"></div>
             </div>
         </div>
     </section>

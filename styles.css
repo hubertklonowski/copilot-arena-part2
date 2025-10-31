@@ -222,51 +222,133 @@ section {
     margin-bottom: 0.5rem;
 }
 
-/* Gallery Section */
+/* Gallery Section - Interactive Carousel */
 .gallery {
     background: var(--white);
 }
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.gallery-item {
+.gallery-carousel {
     position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    cursor: pointer;
-    height: 300px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 60px;
 }
 
-.gallery-item img {
+.gallery-slider {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.gallery-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-slide.active {
+    opacity: 1;
+}
+
+.gallery-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s;
 }
 
-.gallery-item:hover img {
-    transform: scale(1.1);
-}
-
-.gallery-overlay {
+.slide-info {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5));
     color: var(--white);
-    padding: 20px;
-    transform: translateY(100%);
-    transition: transform 0.3s;
+    padding: 30px;
+    text-align: center;
 }
 
-.gallery-item:hover .gallery-overlay {
-    transform: translateY(0);
+.slide-info h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+}
+
+.slide-info p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.9);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    transition: all 0.3s;
+    z-index: 10;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.gallery-nav:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-nav.prev {
+    left: 0;
+}
+
+.gallery-nav.next {
+    right: 0;
+}
+
+.gallery-counter {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.gallery-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--light-color);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid var(--primary-color);
+}
+
+.dot.active {
+    background: var(--primary-color);
+    transform: scale(1.2);
 }
 
 /* Calculator Section */
@@ -622,6 +704,29 @@ footer {
     .reviews-grid {
         grid-template-columns: 1fr;
     }
+    
+    /* Gallery carousel responsive */
+    .gallery-carousel {
+        padding: 0 40px;
+    }
+    
+    .gallery-slider {
+        height: 400px;
+    }
+    
+    .gallery-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .slide-info h3 {
+        font-size: 1.5rem;
+    }
+    
+    .slide-info p {
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -631,5 +736,41 @@ footer {
     
     .section-title {
         font-size: 1.8rem;
+    }
+    
+    /* Gallery carousel mobile */
+    .gallery-carousel {
+        padding: 0 30px;
+    }
+    
+    .gallery-slider {
+        height: 300px;
+    }
+    
+    .gallery-nav {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .slide-info {
+        padding: 15px;
+    }
+    
+    .slide-info h3 {
+        font-size: 1.2rem;
+    }
+    
+    .slide-info p {
+        font-size: 0.85rem;
+    }
+    
+    .gallery-counter {
+        font-size: 1rem;
+    }
+    
+    .dot {
+        width: 10px;
+        height: 10px;
     }
 }
