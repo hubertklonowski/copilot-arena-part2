@@ -12,45 +12,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Gallery - Load photos from photos folder
-function loadGallery() {
-    const galleryGrid = document.getElementById('galleryGrid');
-    
-    // Sample data - in production, this would come from a backend
-    const photos = [
-        { name: 'Maine Coon 1', description: 'Piękny rudy Maine Coon' },
-        { name: 'Maine Coon 2', description: 'Majestatyczny samiec' },
-        { name: 'Maine Coon 3', description: 'Urocze kocięta' },
-        { name: 'Maine Coon 4', description: 'Srebrny tabby' },
-        { name: 'Maine Coon 5', description: 'Czarny Maine Coon' },
-        { name: 'Maine Coon 6', description: 'Biały Maine Coon' },
-        { name: 'Maine Coon 7', description: 'Rodzina Maine Coonów' },
-        { name: 'Maine Coon 8', description: 'Młody Maine Coon' }
-    ];
-
-    // Try to load photos from the photos folder
-    photos.forEach((photo, index) => {
-        const item = document.createElement('div');
-        item.className = 'gallery-item';
-        
-        const img = document.createElement('img');
-        img.src = `photos/cat${index + 1}.jpg`;
-        img.alt = photo.name;
-        
-        // Fallback to placeholder if image doesn't exist
-        img.onerror = function() {
-            this.src = `https://placekitten.com/400/30${index}`;
-        };
-        
-        const overlay = document.createElement('div');
-        overlay.className = 'gallery-overlay';
-        overlay.innerHTML = `<h3>${photo.name}</h3><p>${photo.description}</p>`;
-        
-        item.appendChild(img);
-        item.appendChild(overlay);
-        galleryGrid.appendChild(item);
-    });
-}
+// Gallery is now loaded directly in HTML for better compatibility
+// Photos are loaded from the photos folder
 
 // Calculator functionality
 function calculatePrice() {
@@ -197,7 +160,98 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Initialize gallery on page load
+// Gallery is now directly in HTML, no need to load dynamically
 document.addEventListener('DOMContentLoaded', function() {
-    loadGallery();
+    console.log('Page loaded successfully');
+    initializeSparkles();
+    initializeMeowSound();
 });
+
+// Sparkle effect on cursor movement
+function initializeSparkles() {
+    let lastSparkleTime = 0;
+    const sparkleDelay = 50; // milliseconds between sparkles
+    
+    document.addEventListener('mousemove', function(e) {
+        const currentTime = Date.now();
+        
+        if (currentTime - lastSparkleTime > sparkleDelay) {
+            createSparkle(e.pageX, e.pageY);
+            lastSparkleTime = currentTime;
+        }
+    });
+}
+
+function createSparkle(x, y) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    
+    // Random sparkle styles
+    const colors = ['#FFD700', '#FFA500', '#FF69B4', '#87CEEB', '#98FB98', '#DDA0DD'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    const size = Math.random() * 10 + 5;
+    const offsetX = (Math.random() - 0.5) * 20;
+    const offsetY = (Math.random() - 0.5) * 20;
+    
+    sparkle.style.left = (x + offsetX) + 'px';
+    sparkle.style.top = (y + offsetY) + 'px';
+    sparkle.style.width = size + 'px';
+    sparkle.style.height = size + 'px';
+    sparkle.style.background = randomColor;
+    sparkle.style.borderRadius = '50%';
+    sparkle.style.boxShadow = `0 0 ${size}px ${randomColor}`;
+    
+    document.body.appendChild(sparkle);
+    
+    // Remove sparkle after animation completes
+    setTimeout(() => {
+        sparkle.remove();
+    }, 600);
+}
+
+// Meow sound on button clicks
+function initializeMeowSound() {
+    // Create audio element for meow sound
+    const meowSound = new Audio();
+    meowSound.volume = 0.3;
+    
+    // Using a data URI for a simple meow-like sound (beep)
+    // In production, replace this with an actual meow.mp3 file
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playMeow() {
+        // Create a simple synthesized "meow" sound
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        // Meow-like frequency sweep
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+        oscillator.frequency.exponentialRampToValueAtTime(600, audioContext.currentTime + 0.2);
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.3);
+    }
+    
+    // Add click event to all buttons
+    const buttons = document.querySelectorAll('.btn-primary, button');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            playMeow();
+        });
+    });
+    
+    // Also add to navigation links
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            playMeow();
+        });
+    });
+}
