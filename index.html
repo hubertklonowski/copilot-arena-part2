@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Królewskie Maine Coony - Hodowla Kotów Rasowych</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <i class="fas fa-cat"></i>
+                    <span>Królewskie Maine Coony</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Start</a></li>
+                    <li><a href="#about">O Nas</a></li>
+                    <li><a href="#gallery">Galeria</a></li>
+                    <li><a href="#calculator">Kalkulator</a></li>
+                    <li><a href="#reviews">Opinie</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Witamy w Hodowli Maine Coonów</h1>
+            <p>Pasja, doświadczenie i miłość do najpiękniejszych kotów świata</p>
+            <a href="#contact" class="btn-primary">Skontaktuj się z nami</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">O Naszej Hodowli</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Nasza Pasja</h3>
+                    <p>
+                        Królewskie Maine Coony to hodowla, która od ponad 15 lat specjalizuje się w hodowli 
+                        kotów rasy Maine Coon. Nasza pasja i zaangażowanie sprawiają, że każdy kociak, 
+                        który opuszcza naszą hodowlę, jest zdrowy, usocjalizowany i gotowy do życia 
+                        w nowym domu.
+                    </p>
+                    <h3>Nasze Wartości</h3>
+                    <div class="values">
+                        <div class="value-item">
+                            <i class="fas fa-heart"></i>
+                            <h4>Miłość i Troska</h4>
+                            <p>Każdy kot jest dla nas członkiem rodziny</p>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Zdrowie</h4>
+                            <p>Regularne badania weterynaryjne i szczepienia</p>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-star"></i>
+                            <h4>Jakość</h4>
+                            <p>Rodowody FIFe i najwyższe standardy hodowlane</p>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-users"></i>
+                            <h4>Wsparcie</h4>
+                            <p>Pomoc i doradztwo przez cały czas życia kota</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Galeria Naszych Kotów</h2>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Photos will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="calculator">
+        <div class="container">
+            <h2 class="section-title">Kalkulator Kosztów</h2>
+            <div class="calculator-box">
+                <form id="priceCalculator">
+                    <div class="form-group">
+                        <label for="catType">Typ kota:</label>
+                        <select id="catType" required>
+                            <option value="">Wybierz...</option>
+                            <option value="pet" data-price="4000">Kot domowy (pet) - 4000 zł</option>
+                            <option value="breeding" data-price="6000">Kot hodowlany - 6000 zł</option>
+                            <option value="show" data-price="8000">Kot wystawowy (show) - 8000 zł</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="color">Umaszczenie:</label>
+                        <select id="color" required>
+                            <option value="">Wybierz...</option>
+                            <option value="standard" data-price="0">Standardowe - 0 zł</option>
+                            <option value="rare" data-price="1000">Rzadkie - 1000 zł</option>
+                            <option value="unique" data-price="2000">Unikalne - 2000 zł</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Płeć:</label>
+                        <select id="gender" required>
+                            <option value="">Wybierz...</option>
+                            <option value="male" data-price="0">Samiec - 0 zł</option>
+                            <option value="female" data-price="500">Samica - 500 zł</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="pedigree" data-price="500">
+                            Rozszerzony rodowód - 500 zł
+                        </label>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="transport" data-price="300">
+                            Transport - 300 zł
+                        </label>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="starter" data-price="200">
+                            Pakiet startowy - 200 zł
+                        </label>
+                    </div>
+
+                    <button type="button" class="btn-primary" onclick="calculatePrice()">Oblicz cenę</button>
+                    
+                    <div id="priceResult" class="price-result"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <h2 class="section-title">Opinie Naszych Klientów</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">
+                        "Nasz Maine Coon od Królewskich Maine Coonów to najwspanialszy członek rodziny! 
+                        Profesjonalna obsługa, zdrowy kotek i wsparcie na każdym kroku."
+                    </p>
+                    <div class="reviewer">
+                        <strong>Anna Kowalska</strong>
+                        <span>Warszawa</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">
+                        "Zakup kotka z tej hodowli to najlepsza decyzja! Hodowca zawsze odpowiada 
+                        na pytania i pomaga w trudnych sytuacjach. Polecam z całego serca!"
+                    </p>
+                    <div class="reviewer">
+                        <strong>Piotr Nowak</strong>
+                        <span>Kraków</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">
+                        "Piękne, zdrowe koty o wspaniałych charakterach. Hodowla prowadzona 
+                        z pasją i sercem. Nasz Maine Coon jest idealny!"
+                    </p>
+                    <div class="reviewer">
+                        <strong>Maria Wiśniewska</strong>
+                        <span>Wrocław</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">
+                        "Profesjonalizm na najwyższym poziomie. Kociak przyszedł do nas 
+                        doskonale przygotowany, usocjalizowany i zdrowy. Dziękujemy!"
+                    </p>
+                    <div class="reviewer">
+                        <strong>Janusz Lewandowski</strong>
+                        <span>Gdańsk</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Kontakt</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Adres</h4>
+                            <p>ul. Kwiatowa 15<br>05-500 Piaseczno</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Telefon</h4>
+                            <p>+48 123 456 789</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>kontakt@krolewskiemainecoony.pl</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Godziny odwiedzin</h4>
+                            <p>Pn-Pt: 10:00-18:00<br>Sb: 10:00-14:00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2449.8193874698744!2d21.02392431590358!3d52.07581797973194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471935b8c24c4c7d%3A0x7c2d6b8f8c8c8c8c!2sPiaseczno!5e0!3m2!1spl!2spl!4v1234567890123!5m2!1spl!2spl" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-section">
+                <h3>Formularz Kontaktowy</h3>
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Imię i nazwisko *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Telefon</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Temat *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Wiadomość *</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Wyślij wiadomość</button>
+                    <div id="formMessage" class="form-message"></div>
+                </form>
+            </div>
+
+            <!-- Newsletter Section -->
+            <div class="newsletter-section">
+                <h3>Newsletter</h3>
+                <p>Zapisz się do naszego newslettera, aby otrzymywać informacje o dostępnych kociętkach!</p>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="email" id="newsletterEmail" name="email" placeholder="Twój adres email" required>
+                    <button type="submit" class="btn-primary">Zapisz się</button>
+                </form>
+                <div id="newsletterMessage" class="form-message"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Królewskie Maine Coony</h4>
+                    <p>Hodowla z pasją od 2008 roku</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Social Media</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Królewskie Maine Coony. Wszelkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
